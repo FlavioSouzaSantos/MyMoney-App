@@ -1,0 +1,58 @@
+{
+  "revenue": "Receitas",
+  "expense": "Despesas",
+  "transactions": "Transações",
+  "accountBalance": "Saldo em conta",
+  "currencyValue": "{value}",
+  "@currencyValue": {
+    "description": "Formatação de valor monetário.",
+    "placeholders": {
+        "value": {
+            "type": "double",
+            "format": "compactCurrency",
+            "optionalParameters": {
+                "decimalDigits": 2,
+                "symbol": "R$"
+            }
+        }
+    }
+  },
+  "monthAndYear": "{value}",
+  "@monthAndYear": {
+    "description":"Formação do mês e ano por extenso.",
+    "placeholders": {
+        "value": {
+            "type": "DateTime",
+            "format": "yMMMM"
+        }
+    }
+  },
+  "menuHome": "Início",
+  "menuTransactions": "Transações",
+  "menuSettings": "Config.",
+  "menuPlus": "Mais",
+  "save": "Salvar",
+  "error": "Ocorreu um erro. Por favor tente novamente.",
+  "accountTypes": "Tipos de conta",
+  "accountType": "Tipo de conta",
+  "placeholderAccountType": "Escolha o tipo",
+  "accounts": "Contas",
+  "account": "Conta",
+  "categories": "Categorias",
+  "tags": "Tags",
+  "creditCardTypes": "Tipos de cartão de crédito",
+  "creditCards": "Cartões de crédito",
+  "name": "Nome",
+  "active": "Ativo",
+  "initialValue": "Valor inicial",
+  "ok": "Ok",
+  "yes": "Sim",
+  "no": "Não",
+  "warning": "Atenção",
+  "information": "Informação",
+  "question": "Responda",
+  "fieldRequired": "O campo é obrigatório",
+  "fieldInvalid": "Valor do campo é inválido",
+  "messageConfirmSaveRecord": "Deseja realmente salvar o registro?",
+  "messageConfirmDeleteRecord": "Deseja realmente deletar o registro?"
+}
