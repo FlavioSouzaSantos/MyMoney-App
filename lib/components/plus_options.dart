@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mymoney/components/account_page.dart';
 import 'package:mymoney/components/account_type_page.dart';
+import 'package:mymoney/components/category_page.dart';
 
 class PlusOptions extends StatelessWidget {
 
@@ -48,6 +49,10 @@ class PlusOptions extends StatelessWidget {
         break;
       case 1:
         Navigator.push(context, MaterialPageRoute(builder: (context) => AccountPage()));
+        break;
+      case 2:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage()));
+        break;
     }
   }
 }

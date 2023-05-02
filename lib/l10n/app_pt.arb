@@ -39,6 +39,8 @@
   "accounts": "Contas",
   "account": "Conta",
   "categories": "Categorias",
+  "category": "Categoria",
+  "placeholderCategory": "Escolha a categoria",
   "tags": "Tags",
   "creditCardTypes": "Tipos de cartão de crédito",
   "creditCards": "Cartões de crédito",

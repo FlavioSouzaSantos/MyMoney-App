@@ -9,7 +9,7 @@ class AccountFormController extends CrudFormController<Account> {
   AccountFormController() : super(crudDao: AccountDao());
 
   @override
-  Future<Account> beforeInsetItem(Account item) async {
+  Future<Account> beforeInsertItem(Account item) async {
     Settings? settings = await SettingsDao().getSettings();
     item.userId = settings?.uuidLogged??'';
     return item;

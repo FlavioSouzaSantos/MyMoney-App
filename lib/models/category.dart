@@ -1,15 +1,15 @@
 class Category {
-  final int? id;
-  final String name;
-  final Category? parent;
-  final int? parentId;
-  final bool active;
-  final String uuid;
-  final String userId;
-  final DateTime lastUpdate;
-  final bool syncRelease;
+  int? id;
+  String name;
+  Category? parent;
+  int? parentId;
+  bool active;
+  String uuid;
+  String userId;
+  DateTime lastUpdate;
+  bool syncRelease;
 
-  const Category({
+  Category({
     this.id,
     required this.name,
     this.parent,

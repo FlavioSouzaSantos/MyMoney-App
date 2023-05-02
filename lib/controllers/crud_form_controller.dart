@@ -14,14 +14,14 @@ abstract class CrudFormController<T> extends ValueNotifier<CrudFormState> {
       model = await beforeUpdateItem(model);
       await crudDao.update(model, id);
     }else{
-      model = await beforeInsetItem(model);
+      model = await beforeInsertItem(model);
       await crudDao.insert(model);
     }
     value = CrudFormState.started;
   }
 
   int? getItemId(T item);
-  Future<T> beforeInsetItem(T item) async => item;
+  Future<T> beforeInsertItem(T item) async => item;
   Future<T> beforeUpdateItem(T item) async => item;
 
 }
