@@ -59,7 +59,16 @@ class _CategoryFormState extends CrudFormSate<Category> {
           });
         },
       ),
-
+      Visibility(
+        visible: widget.model.parentId != null,
+        child: Text(AppLocalizations.of(context)!.category),
+      ),
+      Visibility(
+        visible: widget.model.parentId != null,
+        child: Chip(
+          label: Text(widget.model.parent?.name??AppLocalizations.of(context)!.placeholderCategory),
+        ),
+      ),
       Text(AppLocalizations.of(context)!.active),
       Switch(
           value: widget.model.active,
@@ -74,7 +83,12 @@ class _CategoryFormState extends CrudFormSate<Category> {
 
   @override
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.category;
+    if(widget.model.parentId != null){
+      return AppLocalizations.of(context)!.subcategory;
+    }else{
+      return AppLocalizations.of(context)!.category;
+    }
+
   }
 
 }

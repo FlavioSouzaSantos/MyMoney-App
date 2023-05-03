@@ -40,6 +40,7 @@
   "account": "Conta",
   "categories": "Categorias",
   "category": "Categoria",
+  "subcategory": "Subcategoria",
   "placeholderCategory": "Escolha a categoria",
   "tags": "Tags",
   "creditCardTypes": "Tipos de cartão de crédito",
@@ -56,5 +57,6 @@
   "fieldRequired": "O campo é obrigatório",
   "fieldInvalid": "Valor do campo é inválido",
   "messageConfirmSaveRecord": "Deseja realmente salvar o registro?",
-  "messageConfirmDeleteRecord": "Deseja realmente deletar o registro?"
+  "messageConfirmDeleteRecord": "Deseja realmente deletar o registro?",
+  "addSubcategoryToolTip": "Incluir uma nova subcategoria."
 }

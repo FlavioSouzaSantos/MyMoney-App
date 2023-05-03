@@ -37,8 +37,8 @@ class _AccountTypePageStage extends CrudPageState<AccountType> {
   }
 
   @override
-  String getItemName(AccountType item) {
-    return item.name;
+  Widget? getItemTitle(AccountType item) {
+    return Text(item.name);
   }
 
   @override

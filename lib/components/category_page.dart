@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mymoney/components/category_form.dart';
 import 'package:mymoney/components/crud_page.dart';
-import 'package:mymoney/controllers/CategoryPageController.dart';
+import 'package:mymoney/controllers/category_page_controller.dart';
 import 'package:mymoney/controllers/crud_page_controller.dart';
 import 'package:mymoney/models/category.dart';
 import 'package:uuid/uuid.dart';
@@ -35,14 +35,34 @@ class _CategoryPageState extends CrudPageState<Category> {
   @override
   Widget? getItemLeading(Category item) {
     if(item.parentId != null){
-      return const Icon(Icons.move_up);
+      return const Icon(Icons.subdirectory_arrow_right);
     }
     return null;
   }
 
   @override
-  String getItemName(Category item) {
-    return item.name;
+  Widget? getItemTitle(Category item) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(child: Text(item.name)),
+        Visibility(
+          visible: item.parentId == null,
+          child: IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: AppLocalizations.of(context)!.addSubcategoryToolTip,
+            onPressed: () {
+              Category newItem = createNewItem();
+              newItem.parentId = item.id;
+              newItem.parent = item;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryForm(model: newItem)))
+                  .then((value) => controller.loading());
+            },
+          )
+        )
+      ],
+    );
   }
 
   @override

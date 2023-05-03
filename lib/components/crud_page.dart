@@ -17,9 +17,9 @@ abstract class CrudPageState<T> extends State<CrudPage<T>> {
   Widget navigateToForm(BuildContext context, T item);
   String getTitle(BuildContext context);
   T createNewItem();
-  String getItemName(T item);
   int getItemId(T item);
   Widget? getItemLeading(T item);
+  Widget? getItemTitle(T item);
 
   @override
   void initState() {
@@ -101,7 +101,7 @@ abstract class CrudPageState<T> extends State<CrudPage<T>> {
               itemCount: controller.provider.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(getItemName(controller.provider[index])),
+                  title: getItemTitle(controller.provider[index]),
                   leading: getItemLeading(controller.provider[index]),
                   tileColor: Colors.white,
                   onTap: () {

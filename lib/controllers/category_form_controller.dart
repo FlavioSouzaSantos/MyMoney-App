@@ -1,5 +1,5 @@
 import 'package:mymoney/controllers/crud_form_controller.dart';
-import 'package:mymoney/dao/account_category_dao.dart';
+import 'package:mymoney/dao/category_dao.dart';
 import 'package:mymoney/dao/settings_dao.dart';
 import 'package:mymoney/models/category.dart';
 import 'package:mymoney/models/settings.dart';

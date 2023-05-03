@@ -38,8 +38,8 @@ class _AccountPageState extends CrudPageState<Account> {
   }
 
   @override
-  String getItemName(Account item) {
-    return item.name;
+  Widget? getItemTitle(Account item) {
+    return Text(item.name);
   }
 
   @override

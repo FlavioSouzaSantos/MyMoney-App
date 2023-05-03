@@ -37,4 +37,11 @@ class CategoryDao extends CrudDao<Category> {
     return 'tb_category';
   }
 
+  @override
+  Future<Category> loadDependencies(Category entity) async {
+    if(entity.parentId != null){
+      entity.parent = await findById(entity.parentId!!);
+    }
+    return entity;
+  }
 }
