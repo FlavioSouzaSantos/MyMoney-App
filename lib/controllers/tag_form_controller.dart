@@ -1,29 +1,29 @@
 import 'package:mymoney/controllers/crud_form_controller.dart';
-import 'package:mymoney/dao/account_dao.dart';
 import 'package:mymoney/dao/settings_dao.dart';
-import 'package:mymoney/models/account.dart';
+import 'package:mymoney/dao/tag_dao.dart';
 import 'package:mymoney/models/settings.dart';
+import 'package:mymoney/models/tag.dart';
 
-class AccountFormController extends CrudFormController<Account> {
+class TagFormController extends CrudFormController<Tag> {
 
-  AccountFormController() : super(crudDao: AccountDao());
+  TagFormController() : super(crudDao: TagDao());
 
   @override
-  Future<Account> beforeInsertItem(Account item) async {
+  int? getItemId(Tag item) {
+    return item.id;
+  }
+
+  @override
+  Future<Tag> beforeInsertItem(Tag item) async {
     Settings? settings = await SettingsDao().getSettings();
     item.userId = settings?.uuidLogged??'';
     return item;
   }
 
   @override
-  Future<Account> beforeUpdateItem(Account item) async {
+  Future<Tag> beforeUpdateItem(Tag item) async {
     item.syncRelease = true;
     item.lastUpdate = DateTime.now();
     return item;
-  }
-
-  @override
-  int? getItemId(Account item) {
-    return item.id;
   }
 }

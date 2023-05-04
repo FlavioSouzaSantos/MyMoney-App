@@ -24,6 +24,8 @@ class CategoryFormController extends CrudFormController<Category> {
   @override
   Future<Category> beforeUpdateItem(Category item) async {
     _setParentFromId(item);
+    item.syncRelease = true;
+    item.lastUpdate = DateTime.now();
     return item;
   }
 

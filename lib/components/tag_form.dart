@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mymoney/components/crud_form.dart';
-import 'package:mymoney/controllers/account_type_form_controller.dart';
 import 'package:mymoney/controllers/crud_form_controller.dart';
-import 'package:mymoney/models/account_type.dart';
+import 'package:mymoney/controllers/tag_form_controller.dart';
+import 'package:mymoney/models/tag.dart';
 
-class AccountTypeForm extends CrudForm<AccountType> {
-
-  AccountTypeForm({super.key, required super.model});
+class TagForm extends CrudForm<Tag> {
+  TagForm({super.key, required super.model});
 
   @override
-  _AccountTypeFormSate createState() => _AccountTypeFormSate();
+  _TagFormState createState() => _TagFormState();
+
 }
 
-class _AccountTypeFormSate extends CrudStateForm<AccountType> {
+class _TagFormState extends CrudStateForm<Tag> {
 
   final FocusNode _nameFocusNode = FocusNode();
   final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
-    super.dispose();
     _nameController.dispose();
+    super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
     _nameController.text = widget.model.name;
+  }
+
+  @override
+  CrudFormController<Tag> createController() {
+    return TagFormController();
   }
 
   @override
@@ -53,29 +58,21 @@ class _AccountTypeFormSate extends CrudStateForm<AccountType> {
           });
         },
       ),
-      Row(
-        children: [
-          Text(AppLocalizations.of(context)!.active),
-          Switch(
-              value: widget.model.active,
-              onChanged: widget.inProgress ? null : (value) {
-                setState(() {
-                  widget.model.active = value;
-                });
-              }
-          )
-        ],
+      Text(AppLocalizations.of(context)!.active),
+      Switch(
+          value: widget.model.active,
+          onChanged: widget.inProgress ? null : (value) {
+            setState(() {
+              widget.model.active = value;
+            });
+          }
       )
     ];
   }
 
   @override
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.accountType;
+    return AppLocalizations.of(context)!.tag;
   }
 
-  @override
-  CrudFormController<AccountType> createController() {
-    return AccountTypeFormController();
-  }
 }

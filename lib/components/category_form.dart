@@ -14,7 +14,7 @@ class CategoryForm extends CrudForm<Category> {
 
 }
 
-class _CategoryFormState extends CrudFormSate<Category> {
+class _CategoryFormState extends CrudStateForm<Category> {
 
   final FocusNode _nameFocusNode = FocusNode();
   final TextEditingController _nameController = TextEditingController();

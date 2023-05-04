@@ -11,7 +11,7 @@ abstract class CrudForm<T> extends StatefulWidget {
   CrudForm({super.key, required this.model});
 }
 
-abstract class CrudFormSate<T> extends State<CrudForm<T>> {
+abstract class CrudStateForm<T> extends State<CrudForm<T>> {
 
   late final CrudFormController<T> _controller;
   final GlobalKey<FormState> _formKey = GlobalKey();

@@ -1,13 +1,13 @@
 class Tag {
-  final int? id;
-  final String name;
-  final bool active;
-  final String uuid;
-  final String userId;
-  final DateTime lastUpdate;
-  final bool syncRelease;
+  int? id;
+  String name;
+  bool active;
+  String uuid;
+  String userId;
+  DateTime lastUpdate;
+  bool syncRelease;
 
-  const Tag({
+  Tag({
     this.id,
     required this.name,
     required this.active,

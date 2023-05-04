@@ -17,7 +17,7 @@ class AccountForm extends CrudForm<Account> {
 
 }
 
-class _AccountFormSate extends CrudFormSate<Account> {
+class _AccountFormSate extends CrudStateForm<Account> {
 
   final FocusNode _nameFocusNode = FocusNode();
   final TextEditingController _nameController = TextEditingController();
