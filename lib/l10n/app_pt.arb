@@ -45,6 +45,7 @@
   "tags": "Tags",
   "tag": "Tag",
   "creditCardTypes": "Tipos de cartão de crédito",
+  "creditCardType": "Tipo de cartão de crédito",
   "creditCards": "Cartões de crédito",
   "name": "Nome",
   "active": "Ativo",

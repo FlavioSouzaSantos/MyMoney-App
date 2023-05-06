@@ -1,11 +1,11 @@
 class CreditCardType {
-  final int id;
-  final String name;
-  final bool active;
-  final String uuid;
+  int? id;
+  String name;
+  bool active;
+  String uuid;
 
-  const CreditCardType({
-    required this.id,
+  CreditCardType({
+    this.id,
     required this.name,
     required this.active,
     required this.uuid
