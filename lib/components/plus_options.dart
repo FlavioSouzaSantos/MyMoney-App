@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mymoney/components/account_page.dart';
 import 'package:mymoney/components/account_type_page.dart';
 import 'package:mymoney/components/category_page.dart';
+import 'package:mymoney/components/credit_card_page.dart';
 import 'package:mymoney/components/credit_card_type_page.dart';
 import 'package:mymoney/components/tag_page.dart';
 
@@ -60,6 +61,9 @@ class PlusOptions extends StatelessWidget {
         break;
       case 4:
         Navigator.push(context, MaterialPageRoute(builder: (context) => CreditCardTypePage()));
+        break;
+      case 5:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CreditCardPage()));
         break;
     }
   }

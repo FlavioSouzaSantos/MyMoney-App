@@ -2,22 +2,22 @@ import 'package:mymoney/models/credit_card_type.dart';
 import 'package:mymoney/models/account.dart';
 
 class CreditCard {
-  final int? id;
-  final String name;
-  final CreditCardType? type;
-  final int typeId;
-  final Account? account;
-  final int accountId;
-  final int closingDay;
-  final int payingDay;
-  final double limitValue;
-  final bool active;
-  final String uuid;
-  final String userId;
-  final DateTime lastUpdate;
-  final bool syncRelease;
+  int? id;
+  String name;
+  CreditCardType? type;
+  int typeId;
+  Account? account;
+  int accountId;
+  int closingDay;
+  int payingDay;
+  double limitValue;
+  bool active;
+  String uuid;
+  String userId;
+  DateTime lastUpdate;
+  bool syncRelease;
 
-  const CreditCard({
+  CreditCard({
     this.id,
     required this.name,
     this.type,

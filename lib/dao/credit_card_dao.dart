@@ -1,3 +1,5 @@
+import 'package:mymoney/dao/account_dao.dart';
+import 'package:mymoney/dao/credit_card_typeDao.dart';
 import 'package:mymoney/dao/crud_dao.dart';
 import 'package:mymoney/models/credit_card.dart';
 
@@ -44,4 +46,23 @@ class CreditCardDao extends CrudDao<CreditCard> {
     return 'tb_credit_card';
   }
 
+  @override
+  Future<CreditCard> loadDependencies(CreditCard entity) async {
+    if(entity.typeId > 0){
+      entity.type = await CreditCardTypeDao().findById(entity.typeId);
+    }
+    if(entity.accountId > 0){
+      entity.account = await AccountDao().findById(entity.accountId);
+    }
+    return entity;
+  }
+
+  @override
+  Future<List<CreditCard>> findAll() async {
+    List<CreditCard> list = await super.findAll();
+    for (var element in list) {
+      element.type = await CreditCardTypeDao().findById(element.typeId);
+    }
+    return list;
+  }
 }

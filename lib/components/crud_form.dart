@@ -58,16 +58,18 @@ abstract class CrudStateForm<T> extends State<CrudForm<T>> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Visibility(
-                  visible: widget.inProgress,
-                  child: const LinearProgressIndicator()
-              ),
-              ...createFormFields(context)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                    visible: widget.inProgress,
+                    child: const LinearProgressIndicator()
+                ),
+                ...createFormFields(context)
+              ],
+            ),
           ),
         ),
       ),
