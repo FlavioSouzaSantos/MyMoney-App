@@ -37,7 +37,7 @@ dependencies:
   uuid:
   package_info_plus:
   intl: any
-  floating_bottom_bar: ^0.0.1
+  flutter_speed_dial: ^6.2.0
   input_calculator: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.

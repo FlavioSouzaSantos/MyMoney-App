@@ -1,5 +1,6 @@
-import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mymoney/components/balance_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mymoney/components/expense_form.dart';
@@ -22,74 +23,132 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _createContentFromMenuItem(widget.menuIndex),
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-          bottomBarItems: [
-            BottomBarItemsModel(icon: const Icon(Icons.home),
-                iconSelected: Icon(Icons.home, color: Theme.of(context).primaryColor),
-                dotColor: Theme.of(context).primaryColor,
-                title: AppLocalizations.of(context)!.menuHome,
-                titleStyle: Theme.of(context).textTheme.labelSmall,
-                onTap: () => setState(() => widget.menuIndex = 0)
-            ),
-            BottomBarItemsModel(icon: Icon(Icons.bar_chart, color: Theme.of(context).highlightColor),
-                iconSelected: Icon(Icons.bar_chart, color: Theme.of(context).primaryColor),
-                dotColor: Theme.of(context).primaryColor,
-                title: AppLocalizations.of(context)!.menuTransactions,
-                titleStyle: Theme.of(context).textTheme.labelSmall,
-                onTap: () => setState(() => widget.menuIndex = 1)
-            ),
-            BottomBarItemsModel(icon: const Icon(Icons.settings),
-                iconSelected: Icon(Icons.settings, color: Theme.of(context).primaryColor),
-                dotColor: Theme.of(context).primaryColor,
-                title: AppLocalizations.of(context)!.menuSettings,
-                onTap: () => setState(() => widget.menuIndex = 2)
-            ),
-            BottomBarItemsModel(icon: const Icon(Icons.more_horiz),
-                iconSelected: Icon(Icons.more_horiz, color: Theme.of(context).primaryColor),
-                dotColor: Theme.of(context).primaryColor,
-                title: AppLocalizations.of(context)!.menuPlus,
-                titleStyle: Theme.of(context).textTheme.labelSmall,
-                onTap: () => setState(() => widget.menuIndex = 3)
-            ),
-          ],
-          bottomBarCenterModel: BottomBarCenterModel(
-            centerBackgroundColor: Theme.of(context).primaryColor,
-            centerIcon: const FloatingCenterButton(
-              child: Icon(
-                Icons.add,
-                color: AppColors.white,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() => widget.menuIndex = 0);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: widget.menuIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() => widget.menuIndex = 1);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.bar_chart,
+                          color: widget.menuIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            ),
-            centerIconChild: [
-              FloatingCenterButtonChild(
-                child: const Icon(
-                  Icons.money_off,
-                  color: AppColors.white,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ExpenseForm()),
-                  );
-                },
-              ),
-              FloatingCenterButtonChild(
-                child: const Icon(
-                  Icons.credit_card_off,
-                  color: AppColors.white,
-                ),
-                onTap: () => {},
-              ),
-              FloatingCenterButtonChild(
-                child: const Icon(
-                  Icons.money,
-                  color: AppColors.white,
-                ),
-                onTap: () => {},
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() => widget.menuIndex = 2);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.settings,
+                          color: widget.menuIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() => widget.menuIndex = 3);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.more_horiz,
+                          color: widget.menuIndex == 3 ? Theme.of(context).primaryColor : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ],
-          )
+          ),
+        ),
       ),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Theme.of(context).primaryColor,
+        overlayOpacity: 0.5,
+        children: [
+          SpeedDialChild(
+            child: const Icon(
+              Icons.money_off,
+              color: Colors.red,
+            ),
+            backgroundColor: Colors.white,
+            label: AppLocalizations.of(context)!.expense,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ExpenseForm()),
+              );
+            }
+          ),
+          SpeedDialChild(
+            child: const Icon(
+              Icons.credit_card_off,
+              color: Colors.orange
+            ),
+            backgroundColor: Colors.white,
+            label: AppLocalizations.of(context)!.expenseCard,
+            onTap: () {
+
+            }
+          ),
+          SpeedDialChild(
+            child: const Icon(
+            Icons.money,
+              color: Colors.blue
+            ),
+            backgroundColor: Colors.white,
+            label: AppLocalizations.of(context)!.revenue,
+            onTap: () {
+
+            }
+          )
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

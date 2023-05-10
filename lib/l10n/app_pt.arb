@@ -1,6 +1,7 @@
 {
-  "revenue": "Receitas",
-  "expense": "Despesas",
+  "revenue": "Receita",
+  "expense": "Despesa",
+  "expenseCard": "Despesa Cartão",
   "transactions": "Transações",
   "accountBalance": "Saldo em conta",
   "currencyValue": "{value}",
