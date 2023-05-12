@@ -1,5 +1,6 @@
 import 'package:mymoney/dao/crud_dao.dart';
 import 'package:mymoney/dao/database_config.dart';
+import 'package:mymoney/models/repeat_transaction.dart';
 import 'package:mymoney/models/transaction.dart';
 import 'package:sqflite/sqflite.dart' hide Transaction;
 
@@ -12,6 +13,58 @@ class TransactionDao extends CrudDao<Transaction> {
   }
 
   TransactionDao._internal();
+
+  Future<List<int>> insertWithRepeat(Transaction entity, RepeatTransaction repeat) async {
+    List<int> ids = [];
+    List<Transaction> transactions = [];
+
+    entity.totalInstallment = repeat.count;
+    entity.installmentNumber = 1;
+    entity.totalInstallment = repeat.count;
+    transactions.add(entity);
+
+    if(repeat.count > 1){
+      for(var i=2; i <= repeat.count; i++){
+        Transaction newEntity = entity.clone();
+        newEntity.installmentNumber = i;
+        transactions.add(newEntity);
+      }
+    }
+
+    switch(repeat.type){
+      case RepeatTransactionType.day: {
+        transactions.getRange(1, repeat.count).forEach((element) {
+          element.data = element.data.add(Duration(days: element.installmentNumber));
+        });
+      }
+      break;
+      case RepeatTransactionType.month: {
+        transactions.getRange(1, repeat.count).forEach((element) {
+          element.data = _addMonths(element.data, element.installmentNumber);
+        });
+      }
+      break;
+      case RepeatTransactionType.week: {
+        transactions.getRange(1, repeat.count).forEach((element) {
+          element.data = element.data.add(Duration(days: element.installmentNumber*DateTime.daysPerWeek));
+        });
+      }
+      break;
+      case RepeatTransactionType.year: {
+        transactions.getRange(1, repeat.count).forEach((element) {
+          element.data = DateTime(element.data.year+(element.installmentNumber-1),
+              element.data.month, element.data.day);
+        });
+      }
+      break;
+    }
+
+    for(Transaction item in transactions) {
+      ids.add(await insert(item));
+    }
+
+    return ids;
+  }
 
   @override
   Map<String, dynamic> convertEntityToMap(Transaction entity) {
@@ -27,6 +80,7 @@ class TransactionDao extends CrudDao<Transaction> {
       'observation': entity.observation,
       'tag_id': entity.tagId,
       'installment_number': entity.installmentNumber,
+      'total_installment': entity.installmentNumber,
       'credit_card_id': entity.creditCardId,
       'user_id': entity.userId,
       'uuid_group': entity.uuidGroup,
@@ -42,7 +96,8 @@ class TransactionDao extends CrudDao<Transaction> {
         description: map['description'], data: DateTime.parse(map['date'] ?? ''),
         value: map['value'], categoryId: map['category_id'], accountId: map['account_id'],
         fixed: map['fixed'] == 1, pending: map['pending'], observation: map['observation'], tagId: map['tag_id'],
-        installmentNumber: map['installment_number'], creditCardId: map['credit_card_id'],
+        installmentNumber: map['installment_number'], totalInstallment: map['total_installment'],
+        creditCardId: map['credit_card_id'],
         userId: map['user_id'], uuid: map['uuid'], uuidGroup: map['uuid_group'],
         lastUpdate: DateTime.parse(map['last_update'] ?? ''),
         syncRelease: map['sync_release'] == 1);
@@ -60,5 +115,13 @@ class TransactionDao extends CrudDao<Transaction> {
         where : "cast(strftime('%Y', date / 1000, 'unixepoch', 'localtime') as int) = ? AND cast(strftime('%m', date / 1000, 'unixepoch', 'localtime') as int) = ? AND type IN (?)",
         whereArgs : [year, month, transactionTypes.map((e) => e.index).toList()]);
     return List.generate(maps.length, (index) => convertMapToEntity(maps[index]));
+  }
+
+  DateTime _addMonths(DateTime value, int months){
+    int addYears = months ~/ 12;
+    return DateTime(value.year+addYears,
+        value.month+(addYears > 0 ? months -(addYears*12) : months),
+      value.day, value.hour, value.minute, value.second,
+      value.millisecond, value.microsecond);
   }
 }

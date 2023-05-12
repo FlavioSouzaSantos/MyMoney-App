@@ -9,30 +9,31 @@ enum TransactionType {
 }
 
 class Transaction {
-  final int? id;
-  final TransactionType type;
-  final String description;
-  final DateTime data;
-  final double value;
-  final Category? category;
-  final int categoryId;
-  final Account? account;
-  final int accountId;
-  final bool fixed;
-  final bool pending;
-  final String? observation;
-  final Tag? tag;
-  final int? tagId;
-  final int installmentNumber;
-  final CreditCard? creditCard;
-  final int? creditCardId;
-  final String userId;
-  final String uuid;
-  final String? uuidGroup;
-  final DateTime lastUpdate;
-  final bool syncRelease;
+  int? id;
+  TransactionType type;
+  String description;
+  DateTime data;
+  double value;
+  Category? category;
+  int categoryId;
+  Account? account;
+  int accountId;
+  bool fixed;
+  bool pending;
+  String? observation;
+  Tag? tag;
+  int? tagId;
+  int installmentNumber;
+  int totalInstallment;
+  CreditCard? creditCard;
+  int? creditCardId;
+  String userId;
+  String uuid;
+  String? uuidGroup;
+  DateTime lastUpdate;
+  bool syncRelease;
 
-  const Transaction({
+  Transaction({
     this.id,
     required this.type,
     required this.description,
@@ -48,6 +49,7 @@ class Transaction {
     this.tag,
     this.tagId,
     required this.installmentNumber,
+    required this.totalInstallment,
     this.creditCard,
     this.creditCardId,
     required this.userId,
@@ -56,4 +58,31 @@ class Transaction {
     required this.lastUpdate,
     required this.syncRelease
   });
+
+  Transaction clone() {
+    return Transaction(
+        type: type,
+        description: description,
+        data: data,
+        value: value,
+        category: category,
+        categoryId: categoryId,
+        account: account,
+        accountId: accountId,
+        fixed: fixed,
+        pending: pending,
+        observation: observation,
+        tag: tag,
+        tagId: tagId,
+        installmentNumber: installmentNumber,
+        totalInstallment: totalInstallment,
+        creditCard: creditCard,
+        creditCardId: creditCardId,
+        userId: userId,
+        uuid: uuid,
+        uuidGroup: uuidGroup,
+        lastUpdate: lastUpdate,
+        syncRelease: syncRelease
+    );
+  }
 }

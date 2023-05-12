@@ -58,6 +58,7 @@
   "name": "Nome",
   "active": "Ativo",
   "initialValue": "Valor inicial",
+  "value": "Valor",
   "ok": "Ok",
   "yes": "Sim",
   "no": "Não",

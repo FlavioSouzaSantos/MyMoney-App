@@ -7,6 +7,8 @@ import 'package:mymoney/components/expense_form.dart';
 import 'package:mymoney/components/plus_options.dart';
 import 'package:mymoney/components/transaction_list_and_filter.dart';
 import 'package:mymoney/dao/database_config.dart';
+import 'package:mymoney/models/transaction.dart';
+import 'package:uuid/uuid.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -120,7 +122,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ExpenseForm()),
+                MaterialPageRoute(builder: (context) => ExpenseForm(model: Transaction(type: TransactionType.expense, description: '', data: DateTime.now(), value: 0.0, categoryId: 0, accountId: 0, fixed: false, pending: false, installmentNumber: 1, totalInstallment: 1, userId: '', uuid: const Uuid().v4(), lastUpdate: DateTime.now(), syncRelease: true))),
               );
             }
           ),
